@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "GetAllCategories";
+}
+
+<h1 class="mb-5" style="margin-top:100px;">Categories</h1>
+
+<div class="row">
+    @foreach (var category in Model)
+    {
+        <div class="col-md-6 col-xl-3 mb-3">
+            <a asp-action="GetAllCoursesInCategory" asp-controller="Home" asp-route-Id="@category.CategoryId" class="text-dark">
+                <div class="card text-center">
+                    <div class="card-header h-100">
+                        <h5 class="card-title">@category.CategoryName</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>

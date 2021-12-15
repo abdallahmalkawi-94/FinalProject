@@ -1,0 +1,38 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+<form asp-action="Login" style="margin:100px auto;">
+
+    <table class="table table-bordered">
+        <tr>
+            <td>
+                <label asp-for="UserName"></label>
+            </td>
+            <td>
+                <input asp-for="UserName" class="form-control"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label asp-for="Password"></label>
+            </td>
+            <td>
+                <input asp-for="Password" class="form-control"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="text-center">
+                <input type="submit" value="Login" class="btn btn-success"/>
+            </td>
+            
+        </tr>
+
+    </table>
+
+</form>

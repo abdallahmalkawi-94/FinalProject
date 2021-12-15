@@ -1,0 +1,60 @@
+﻿@model Course
+
+@{
+    ViewData["Title"] = "CourseDetail";
+}
+
+<h1 class="mb-5 text-danger" style="margin-top:100px;">"@Model.CourseName"</h1>
+
+<div class="card w-50" style="margin:50px auto;">
+
+    <div class="card-header p-0 m-0">
+        <img src="@Url.Content(Model.CourseImg)" class="card-img-top" alt="@Model.CourseName">
+    </div>
+
+    <div class="card-body">
+        <h5 class="card-title">@Model.CourseName</h5>
+        <h6 class="card-subtitle mb-2 text-muted">@Model.Category.CategoryName</h6>
+        <hr />
+        <p class="card-text">@Model.CourseDescription</p>
+    </div>
+
+    <div class="card-footer text-center">
+        <div>
+            <label asp-for="Period"></label>
+            <h5 class="text-danger">@Model.Period Weeks</h5>
+        </div>
+
+        <div>
+            <label asp-for="Price"></label>
+            <h5 class="text-danger">@Model.Price JD</h5>
+        </div>
+
+    </div>
+</div>
+
+<table class="table table-bordered">
+    <tr>
+        <td>
+            User Enroll This Course
+        </td>
+    </tr>
+    
+    @foreach (var userCourse in Model.UserCourses)
+    {
+        <tr>
+            <td>
+                @if (userCourse.UserId == Model.UserId)
+                {
+                    @userCourse.User.FullName <span class="text-danger">(Trainer)</span>
+                }
+                else
+                {
+                    @userCourse.User.FullName
+                }
+
+            </td>
+        </tr>
+    }
+</table>
+

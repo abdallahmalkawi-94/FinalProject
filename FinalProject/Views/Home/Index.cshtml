@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Course>
+
+    <h2 class="mb-5" style="margin-top:100px;">Courses</h2>
+
+@{
+    ViewData["Title"] = "Home | Courses";
+    bool inSign = false;
+
+    if (Context.Session.GetInt32("UserId") != null)
+    {
+        inSign = true;
+        <a asp-action="CreateCourse" asp-controller="User" class="mb-5 w-100 btn btn-outline-info btn-lg">Create New Course</a>
+    }
+}
+
+<div class="row">
+    @foreach (var course in Model)
+    {
+        <div class="col-md-6 col-xl-4 mb-3">
+            <div class="card">
+
+                <div class="card-header p-0 m-0">
+                    <img src="@Url.Content(course.CourseImg)" class="card-img-top" alt="@course.CourseName">
+                </div>
+
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Tranier <span class="text-danger">@course.User.FullName</span> </h6>
+                    <h5 class="card-title">@course.CourseName</h5>
+                    <h6 class="card-subtitle mb-2 text-danger">@course.Category.CategoryName</h6>
+                    <hr />
+                    <p class="card-text">@course.CourseDescription</p>
+                </div>
+
+                <div class="card-footer text-center">
+                    <a asp-action="CourseDetail" asp-controller="Home" asp-route-id="@course.CourseId" class="btn btn-success">Detail</a>
+                    @if (inSign)
+                    {
+                        <a asp-action="Enroll" 
+                           asp-controller="User" 
+                           asp-route-UserId="@Context.Session.GetInt32("UserId")"
+                           asp-route-CourseId="@course.CourseId"
+                           class="btn btn-success">Enroll</a>
+
+                        <a href="#" class="btn btn-warning">Edit</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

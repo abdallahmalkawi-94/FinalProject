@@ -1,0 +1,34 @@
+﻿@model IEnumerable<User>
+
+@{
+    ViewData["Title"] = "GetAllTrainer";
+}
+
+<div class="row" style="margin:100px auto;">
+    @foreach (var user in Model)
+    {
+        <div class="col-md-6 col-xl-4 mb-3">
+            <div class="card">
+
+                <div class="card-header p-0 m-0">
+                    <img src="@Url.Content(user.UserImg)" class="card-img-top w-100" alt="@user.FullName">
+                </div>
+
+                <div class="card-body">
+                    <h4 class="card-title text-danger">@user.FullName</h4>
+                    <h6>@user.Major</h6>
+                    <hr />
+                    <address style="font-style:italic;">
+                        Address - @user.FullAddress <br />
+                        Email - @user.Email <br />
+                        Phone - @user.Phone <br />
+                    </address>
+                </div>
+
+                <div class="card-footer text-center">
+                    <a asp-action="" asp-controller="" asp-route-id="@user.UserId" class="btn btn-success" target="_blank">Download CV</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
