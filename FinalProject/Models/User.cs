@@ -53,12 +53,13 @@ namespace FinalProject.Models
         [Required(ErrorMessage = "Please Enter Password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        public string Role { get; set; } = "User";
-
+        public Role Role { get; set; } = Role.User;
         public ICollection<UserCourse> UserCourses { get; set; }
 
 
     }
 
     public enum Gender { Male , Female}
+
+    public enum Role { Admin , User}
 }

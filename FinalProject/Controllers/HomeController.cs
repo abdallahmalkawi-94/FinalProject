@@ -20,7 +20,7 @@ namespace FinalProject.Controllers
 
         public IActionResult Index()
         {
-            var courses = db.Courses.Include(u => u.User).Include(c => c.Category);
+            var courses = db.Courses.Include(u => u.User).Include(c => c.Category).Where(u => u.User.IsDeleted == false).ToList();
             return View(courses);
         }
 
@@ -36,7 +36,7 @@ namespace FinalProject.Controllers
 
         public IActionResult GetAllCoursesInCategory(int Id)
         {
-            var courses = db.Courses.Include(user => user.User).Include(category => category.Category).Where(category => category.CategoryId == Id);
+            var courses = db.Courses.Include(user => user.User).Include(category => category.Category).Where(category => category.CategoryId == Id).Where(u => u.User.IsDeleted == false).ToList();
             ViewBag.CategoryName = db.Categories.Find(Id).CategoryName;
             return View(courses);
         }

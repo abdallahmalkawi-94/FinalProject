@@ -1,0 +1,110 @@
+﻿@model AdminViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!-- Leatest Course-->
+
+<section style="margin:100px auto 50px;" class="w-100">
+    <div class="row">
+        <div class="col-lg-8 col-sm-12">
+            <h1 class="mb-3 text-danger">Leatest 5 Courses</h1>
+            <table class="table table-bordered table-success text-center h-100">
+                <tr>
+                    <th>@Html.DisplayNameFor(c => c.courses[0].CourseName)</th>
+                    <th>@Html.DisplayNameFor(c => c.users[0].FullName)</th>
+                    <th>@Html.DisplayNameFor(c => c.categories[0].CategoryName)</th>
+                    <th>@Html.DisplayNameFor(c => c.courses[0].CreateDate)</th>
+                </tr>
+
+                @for (int i = 0; i < Model.courses.Count; i++)
+                {
+            <tr>
+                 <td>
+                     <a asp-action="CourseDetail"
+                        asp-controller="Home"
+                        asp-route-id="@Model.courses[i].CourseId"
+                        class="btn btn-link text-dark">@Model.courses[i].CourseName</a>
+                 </td>
+                
+                <td>@Model.courses[i].User.FullName</td>
+                <td>@Model.courses[i].Category.CategoryName</td>
+                <td>@Model.courses[i].CreateDate</td>
+            </tr>
+                }
+            </table>
+        </div>
+
+        <div class="col-lg-4 col-sm-12">
+            <h1 class="mb-3 text-danger">Leatest 5 Category</h1>
+            <table class="table table-bordered table-danger text-center h-100">
+                <tr>
+                    <th>@Html.DisplayNameFor(c => c.categories[0].CategoryName)</th>
+                    <th>@Html.DisplayNameFor(c => c.categories[0].CreateDate)</th>
+                </tr>
+
+                @for (int i = 0; i < Model.categories.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="CategoryDetail"
+                               asp-controller="Admin"
+                               asp-route-id="@Model.categories[i].CategoryId"
+                               class="btn btn-link text-dark">@Model.categories[i].CategoryName</a>
+                        </td>
+
+                        <td>@Model.categories[i].CreateDate</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    
+</section>
+
+
+<!-- Leatest User-->
+<section style="margin:100px auto 50px;" class="w-100">
+    <h1 class="mb-3 text-danger">Leatest 5 Users</h1>
+    <table class="table table-bordered table-info text-center h-100">
+        <tr>
+            <th>@Html.DisplayNameFor(c => c.users[0].FullName)</th>
+            <th>@Html.DisplayNameFor(c => c.users[0].Email)</th>
+            <th>@Html.DisplayNameFor(c => c.users[0].Phone)</th>
+            <th>@Html.DisplayNameFor(c => c.users[0].CreateDate)</th>
+            <th>Operations</th>
+        </tr>
+
+        @for (int i = 0; i < Model.users.Count; i++)
+        {
+            <tr>
+                <td>
+                    <a asp-action="UserDetail" 
+                       asp-controller="Admin" 
+                       asp-route-id="@Model.users[i].UserId" 
+                       class="btn btn-link text-dark">@Model.users[i].FullName</a>
+                </td>
+                <td>@Model.users[i].Email</td>
+                <td>@Model.users[i].Phone</td>
+                <td>@Model.users[i].CreateDate</td>
+                <td>
+                    <a asp-action="EditUser" 
+                       asp-controller="Admin" 
+                       asp-route-id="@Model.users[i].UserId" 
+                       class="btn btn-outline-warning">Edit</a>
+
+                    <a asp-action="DeleteUser" 
+                       asp-controller="Admin" 
+                       asp-route-id="@Model.users[i].UserId" 
+                       class="btn btn-outline-danger">Delete</a>
+
+                    <a asp-action="RestUserPassword" 
+                       asp-controller="Admin" 
+                       asp-route-id="@Model.users[i].UserId" 
+                       class="btn btn-outline-info">Rest Password</a>
+                </td>
+            </tr>
+        }
+    </table>
+</section>

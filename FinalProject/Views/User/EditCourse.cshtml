@@ -1,0 +1,71 @@
+﻿@model Course
+
+@{
+    ViewData["Title"] = "EditCourse";
+}
+
+<h1 class="text-danger">@Model.CourseName</h1>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="EditCourse">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CourseId" />
+            <div class="form-group">
+                <label asp-for="CourseName" class="control-label"></label>
+                <input asp-for="CourseName" class="form-control" />
+                <span asp-validation-for="CourseName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseDescription" class="control-label"></label>
+                <input asp-for="CourseDescription" class="form-control" />
+                <span asp-validation-for="CourseDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Period" class="control-label"></label>
+                <input asp-for="Period" class="form-control" />
+                <span asp-validation-for="Period" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Category.CategoryName" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
+                <span asp-validation-for="Category.CategoryName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.FullName" class="control-label"></label>
+                <input asp-for="User.FullName" disabled readonly class="form-control" />
+                <span asp-validation-for="User.FullName" class="text-danger"></span>
+            </div>
+            <input type="hidden" value="@Model.CourseImg" name="CourseImg" />
+            <input type="hidden" value="@Model.UserId" name="UserId" />
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

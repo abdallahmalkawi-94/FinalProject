@@ -41,8 +41,14 @@
                            asp-route-CourseId="@course.CourseId"
                            class="btn btn-success">Enroll</a>
 
-                        <a href="#" class="btn btn-warning">Edit</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
+                        <a asp-action="EditCourse" 
+                           asp-controller="User" 
+                           asp-route-id="@course.CourseId"
+                           class="btn btn-warning">Edit</a>
+
+                        <a asp-action="DeleteCourse" 
+                           asp-controller="User" 
+                           asp-route-id="@course.CourseId" class="btn btn-danger">Delete</a>
                     }
                 </div>
             </div>
